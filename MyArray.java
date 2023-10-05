@@ -1,4 +1,4 @@
-package lab1;
+package lab3;
 
 import java.util.Arrays;
 
@@ -10,113 +10,101 @@ public class MyArray {
 		this.array = array;
 	}
 
-	public int[] mirror() {
-		int[] arr = new int[array.length * 2];
+	// To find the index of the target in the array. If the target
+	// is not found in the array, then the method returns -1.
+	// Input: int[] array = {12, 10, 9, 45, 2, 10, 10, 45}, 45
+	// Output: 3
+	public int iterativeLinearSearch(int target) {
 		for (int i = 0; i < array.length; i++) {
-			arr[i] = array[i];
-			arr[arr.length - i - 1] = array[i];
+			if (array[i] == target) {
+				return i;
+			}
+
 		}
-		return arr;
+		return -1;
 	}
 
-	public int[] removeDuplicates() {
-		int count = 0;
-		for (int i = 0; i < array.length; i++) {
-			for (int j = i + 1; j < array.length; j++) {
-				if (array[i] == array[j]) {
-					count++;
-					break;
+	// To find the index of the target in the array. If the target
+	// is not found in the array, then the method returns -1.
+	// Input: int[] array = {12, 10, 9, 45, 2, 10, 10, 45}, 15
+	// Output: -1
+	public int recursiveLinearSearch(int target) {
+		return help(target, 0);
+	}
+
+	public int help(int target, int index) {
+		if (index == array.length) {
+			return -1;
+		} else {
+			if (array[index] == target) {
+				return index;
+			} else {
+				return help(target, index + 1);
+			}
+		}
+	}
+
+	// To find the index of the target in the sorted array. If the
+	// target is not found in the array, then the method returns -1.
+	public int iterativeBinarySearch(int target) {
+		Arrays.sort(array);
+		if (array[(array.length - 1) / 2] == target) {
+			return (array.length - 1) / 2;
+		} else {
+			if (target > array[(array.length - 1) / 2]) {
+				for (int i = array.length / 2 + 1; i < array.length; i++) {
+					if (array[i] == target) {
+						return i;
+					}
+				}
+			} else {
+				for (int i = 0; i < array.length / 2; i++) {
+					if (array[i] == target) {
+						return i;
+					}
 				}
 			}
-
 		}
-		int[] arr = new int[array.length - count];
-		int count1 = 0;
-		boolean a;
-		for (int i = 0; i < array.length; i++) {
-			a = false;
-			for (int j = 0; j < i; j++) {
-				if (array[i] == array[j]) {
-					a = true;
-				}
-			}
-			if (!a) {
-				arr[count1] = array[i];
-				count1++;
-			}
-
-		}
-
-		return arr;
+		return -1;
 
 	}
 
-	public int[] getMissingValues() {
-		int start = array[0];
-		int end = array[array.length - 1];
-		int[] arr = new int[end - start - array.length + 1];
-		int index = 0;
-		for (int i = start; i <= end; i++) {
-			boolean found = false;
-			for (int num : array) {
-				if (num == i) {
-					found = true;
-					break;
-				}
-
-			}
-			if (!found) {
-				arr[index] = i;
-				index++;
-			}
-		}
-		return arr;
+	// To find the index of the target in the sorted array. If the target is not
+	// found in the array, then the method returns -1.
+	public int recursiveBinarySearch(int target) {
+		return help2(target, 0, array.length-1);
 	}
 
-	public int[] fillMissingValues(int k) {
-		int assign = 0;
-		if (array[0] == -1) {
-			for (int i = 1; i <= k; i++) {
-				assign += array[i];
-			}
-			array[0] = assign / k;
+	public int help2(int target ,int start, int end) {
+		Arrays.sort(array);
+		if(start > end) {
+			return -1;
 		}
-		for (int i = 1; i < array.length - (k - 1); i++) {
-			if (array[i] < array[i - 1]) {
-				assign = array[i - 1];
-				for (int j = i + 1; j < i + k; j++) {
-					assign += array[j];
+		else {
+			int mid = (start+ end)/2;
+			if(array[mid] == target) {
+				return mid;
+			}
+			else {
+				if(target > array[mid]) {
+					return help2(target, mid+1, end);
 				}
-				array[i] = assign / k;
-				assign = 0;
+				else {
+					return help2(target, start, mid-1);
+				}
 			}
 		}
-		if (array[array.length - 1] == -1) {
-			for (int i = array.length - k - 1; i < array.length - 1; i++) {
-				assign += array[i];
-			}
-			array[array.length - 1] = assign / k;
-
-		}
-
-		return array;
 	}
 
 	public static void main(String[] args) {
-		int[] array = { 1, 2, 3 };
-		int[] array2 = { 1, 3, 5, 1, 3, 7, 9, 8 };
-		int[] array3 = { 10, 11, 12, 13, 14, 16, 17, 19, 20 };
-		int[] array4 = { 10, 11, 12, -1, 14, 10, 17, 19, 20 };
-
+		int[] array = { 12, 10, 9, 45, 2, 10, 10, 45 };
 		MyArray myArray = new MyArray(array);
-		MyArray myArray2 = new MyArray(array2);
-		MyArray myArray3 = new MyArray(array3);
-		MyArray myArray4 = new MyArray(array4);
-		
-		System.out.println(Arrays.toString(myArray.mirror()));
-		System.out.println(Arrays.toString(myArray2.removeDuplicates()));
-		System.out.println(Arrays.toString(myArray3.getMissingValues()));
-		System.out.println(Arrays.toString(myArray4.fillMissingValues(3)));
-
+		System.out.println(Arrays.toString(array));
+		System.out.println(myArray.iterativeLinearSearch(45));
+		System.out.println(myArray.recursiveLinearSearch(10));
+		Arrays.sort(array);
+		System.out.println(Arrays.toString(array));
+		System.out.println(myArray.iterativeBinarySearch(10));
+		System.out.println(myArray.recursiveBinarySearch(12));
 	}
 }
