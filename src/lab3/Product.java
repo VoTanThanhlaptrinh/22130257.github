@@ -32,9 +32,10 @@ public class Product implements Comparable<Product> {
 	}
 
 	public boolean sort(Product other) {
-		if (id.compareToIgnoreCase(other.getId()) == 1) {
+		if(price > other.getPrice()) {
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}

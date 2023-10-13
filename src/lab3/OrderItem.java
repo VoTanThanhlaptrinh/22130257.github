@@ -29,4 +29,12 @@ public class OrderItem implements Comparable<OrderItem> {
 	public String toString() {
 		return p.toString() + " quatity: " + quatity;
 	}
+	public boolean sort(OrderItem o) {
+		if(p.sort(o.getP())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
