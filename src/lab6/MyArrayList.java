@@ -194,7 +194,7 @@ public class MyArrayList<E> {
 	// comparator.
 
 	public void sort(Comparator<E> c) {
-		Arrays.sort(elements, 0, size);
+		Arrays.sort(elements, 0, size, c);
 	}
 
 	public static void main(String[] args) {

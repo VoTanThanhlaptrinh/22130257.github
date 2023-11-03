@@ -36,10 +36,10 @@ public class SinglyLinkedList<E> {
 	// Adds a new element to the front of the list.
 	public void addFirst(E e) {
 		Node<E> node = new Node<E>(e, head);
-		head = node;
 		if (head == null) {
 			tail = node;
 		}
+		head = node;
 		size++;
 	}
 
@@ -84,13 +84,16 @@ public class SinglyLinkedList<E> {
 
 	public static void main(String[] args) {
 		SinglyLinkedList<String> list = new SinglyLinkedList<String>();
-		list.addFirst("A");
-		list.addFirst("B");
-		list.addFirst("C");
-		list.addFirst("C");
+		list.addFirst("F");
+		list.addFirst("F");
+		list.addFirst("F");
+		list.addLast("g");
+		list.addLast("e");
+
+		
 		int a = list.size();
 		for (int i = 0; i < a; i++) {
-			System.out.println(list.removeLast());
+			System.out.println(list.removeFirst());
 		}
 	}
 }
