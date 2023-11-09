@@ -76,7 +76,7 @@ public class MyPredicates {
 		arrayList.add(4);
 		arrayList.add(6);
 		arrayList.add(9);
-
+		
 		System.out.println(arrayList);
 		System.out.println(find(arrayList, new Even()));
 
