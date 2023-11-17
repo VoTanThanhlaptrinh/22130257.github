@@ -73,7 +73,7 @@ public class TestTask2 {
 		System.out.println(mag1.isSameTypeAndAuthor(mag1));
 		System.out.println(ref1.isSameTypeAndAuthor(mag3) + "\n");
 		System.out.println(listOfPublications.getCostAllPublications());
-		System.out.println(listOfPublications.isContainMagazine("Magazine A"));
+		System.out.println(listOfPublications.isContainMagazineGivenName("Magazine A"));
 		System.out.println(listOfPublications.listMagazine(2022).size());
 		System.out.println(listOfPublications.findReferenceHaveMaxPages().title);
 		listOfPublications.sort();
